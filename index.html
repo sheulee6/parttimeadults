@@ -33,6 +33,37 @@
             overflow-x: hidden;
         }
 
+        /* --- LANGUAGE TOGGLE LOGIC --- */
+        html[lang="en"] .lang-zh { display: none !important; }
+        html[lang="zh"] .lang-en { display: none !important; }
+
+        .lang-switcher {
+            margin-top: 1.5rem;
+            display: flex;
+            gap: 1rem;
+            font-family: var(--font-tech);
+            font-size: 0.8rem;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            color: var(--text-mute);
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: color 0.2s;
+        }
+
+        .lang-btn:hover { color: var(--text-main); }
+        .lang-btn.active { 
+            color: var(--text-main); 
+            font-weight: 600; 
+            text-decoration: underline; 
+            text-underline-offset: 4px;
+        }
+
         /* DIRECTORIAL LAYOUT: Fixed Left, Scrolling Right */
         .sidebar {
             width: 35%;
@@ -137,6 +168,11 @@
             letter-spacing: -0.03em;
         }
 
+        .massive-statement.lang-zh {
+            font-size: 3.5rem; /* 稍微縮小中文字體以維持平衡 */
+            font-family: 'Noto Serif TC', serif;
+        }
+
         .massive-statement span {
             color: var(--text-mute);
             font-style: italic;
@@ -148,6 +184,12 @@
             line-height: 1.6;
             max-width: 650px;
             margin-bottom: 2rem;
+        }
+        
+        .text-body.lang-zh {
+            font-family: 'Noto Serif TC', serif;
+            font-size: 1.05rem;
+            line-height: 1.8;
         }
 
         /* STRUCTURAL GRIDS */
@@ -170,6 +212,10 @@
             font-size: 0.9rem;
             color: var(--text-mute);
             line-height: 1.5;
+        }
+        
+        .framework-item p.lang-zh {
+            font-family: 'Noto Serif TC', serif;
         }
 
         .framework-num {
@@ -212,6 +258,11 @@
             font-size: 1rem;
             max-width: 500px;
         }
+        
+        .directory-content p.lang-zh {
+            font-family: 'Noto Serif TC', serif;
+            line-height: 1.6;
+        }
 
         /* INTERACTION CTA */
         .brutalist-button {
@@ -239,6 +290,7 @@
             .content-area { width: 100%; margin-left: 0; }
             .section { padding: 3rem 2rem; }
             .massive-statement { font-size: 3rem; }
+            .massive-statement.lang-zh { font-size: 2.2rem; }
             .framework-grid { grid-template-columns: 1fr; }
             .directory-item { grid-template-columns: 1fr; gap: 0.5rem; }
             nav { flex-direction: row; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
@@ -255,21 +307,45 @@
                 <h1>PartTime<br>Adults</h1>
                 <div class="cn-title">兼職大人</div>
             </div>
+            
+            <div class="lang-switcher">
+                <button class="lang-btn active" id="btn-en" onclick="setLanguage('en')">EN</button>
+                <span>/</span>
+                <button class="lang-btn" id="btn-zh" onclick="setLanguage('zh')">繁中</button>
+            </div>
+
             <div class="meta-data">
-                Director: Hestia Lee<br>
-                Location: JCCAC L4-12<br>
-                Focus: Socially Engaged Art
+                <div class="lang-en">
+                    Director: Hestia Lee<br>
+                    Location: JCCAC L4-12<br>
+                    Focus: Socially Engaged Art
+                </div>
+                <div class="lang-zh" style="font-family: 'Noto Serif TC', serif;">
+                    總監：Hestia Lee<br>
+                    地點：JCCAC L4-12<br>
+                    焦點：社會參與式藝術
+                </div>
             </div>
             
             <nav>
-                <a href="#about" id="nav-about" class="active" onclick="switchPage('about')">01. Manifesto</a>
-                <a href="#news" id="nav-news" onclick="switchPage('news')">02. Dispatches</a>
-                <a href="#market" id="nav-market" onclick="switchPage('market')">03. The Market</a>
+                <a href="#about" id="nav-about" class="active" onclick="switchPage('about')">
+                    <span class="lang-en">01. Manifesto</span>
+                    <span class="lang-zh">01. 核心理念</span>
+                </a>
+                <a href="#news" id="nav-news" onclick="switchPage('news')">
+                    <span class="lang-en">02. Dispatches</span>
+                    <span class="lang-zh">02. 運作日誌</span>
+                </a>
+                <a href="#market" id="nav-market" onclick="switchPage('market')">
+                    <span class="lang-en">03. The Market</span>
+                    <span class="lang-zh">03. 服務與委託</span>
+                </a>
             </nav>
         </div>
 
         <div>
-            <div class="status-badge">Phase: Incubation</div>
+            <div class="status-badge lang-en">Phase: Incubation</div>
+            <div class="status-badge lang-zh" style="font-family: 'Noto Serif TC', serif; font-size: 0.8rem;">當前階段：籌備中</div>
         </div>
     </aside>
 
@@ -278,91 +354,118 @@
         
         <!-- 01. MANIFESTO (About) -->
         <section id="about" class="section active">
-            <h2 class="massive-statement">
+            <h2 class="massive-statement lang-en">
                 We believe that being a "full-time adult" shouldn’t mean losing touch with your community, <span>your curiosity, or your city.</span>
             </h2>
+            <h2 class="massive-statement lang-zh">
+                我們堅信，成為一個「全職大人」，<span>不意味著必須與社區、好奇心或這座城市失去連結。</span>
+            </h2>
 
-            <p class="text-body">Our practice sits at the intersection of people, memory, and space. By shifting the lens from personal healing to broader social connection, the studio creates art that triggers awareness, preserves local memories, and fosters deep human relationships.</p>
+            <p class="text-body lang-en">Our practice sits at the intersection of people, memory, and space. By shifting the lens from personal healing to broader social connection, the studio creates art that triggers awareness, preserves local memories, and fosters deep human relationships.</p>
+            <p class="text-body lang-zh">我們的實踐立足於人、記憶與空間的交匯處。透過將視角從個人療癒轉向更廣泛的社會連結，工作室致力於創作能喚醒意識、保存本地記憶並深化人際關係的藝術作品。</p>
             
-            <p class="text-body">Located in the heart of the JCCAC arts community, PartTime Adults is a creative laboratory. This is a space for art, but more importantly, it is an open platform for fellow dreamers and anyone who cares deeply about this city.</p>
+            <p class="text-body lang-en">Located in the heart of the JCCAC arts community, PartTime Adults is a creative laboratory. This is a space for art, but more importantly, it is an open platform for fellow dreamers and anyone who cares deeply about this city.</p>
+            <p class="text-body lang-zh">「兼職大人」座落於 JCCAC 藝術村的核心，是一個創意實驗室。這不僅是一個藝術空間，更是一個為同路人及深愛這座城市的人所建立的開放平台。</p>
 
             <div class="framework-grid">
                 <div class="framework-item">
                     <span class="framework-num">Core 01</span>
-                    <h3>Socially Engaged</h3>
-                    <p>We don't believe art is confined to a gallery wall. We use diverse mediums—from illustration to sensory gathering—tailored to specific social topics.</p>
+                    <h3 class="lang-en">Socially Engaged</h3>
+                    <h3 class="lang-zh">社會參與</h3>
+                    <p class="lang-en">We don't believe art is confined to a gallery wall. We use diverse mediums—from illustration to sensory gathering—tailored to specific social topics.</p>
+                    <p class="lang-zh">我們不認為藝術僅局限於畫廊之內。針對特定社會議題，我們運用從插畫到感官聚會等多元媒介進行創作。</p>
                 </div>
                 <div class="framework-item">
                     <span class="framework-num">Core 02</span>
-                    <h3>Five Senses</h3>
-                    <p>Moving beyond the visual, we design interactive experiences using sound, scent, and touch to break language barriers and connect neighbors.</p>
+                    <h3 class="lang-en">Five Senses</h3>
+                    <h3 class="lang-zh">五感體驗</h3>
+                    <p class="lang-en">Moving beyond the visual, we design interactive experiences using sound, scent, and touch to break language barriers and connect neighbors.</p>
+                    <p class="lang-zh">超越視覺的侷限，我們透過聲音、氣味與觸覺設計互動體驗，打破語言隔閡並重新連結社區鄰里。</p>
                 </div>
                 <div class="framework-item">
                     <span class="framework-num">Core 03</span>
-                    <h3>18 Districts</h3>
-                    <p>Committed to documenting the overlooked corners and shifting landscapes of Hong Kong—celebrating the beauty of the ordinary.</p>
+                    <h3 class="lang-en">18 Districts</h3>
+                    <h3 class="lang-zh">十八區紀錄</h3>
+                    <p class="lang-en">Committed to documenting the overlooked corners and shifting landscapes of Hong Kong—celebrating the beauty of the ordinary.</p>
+                    <p class="lang-zh">致力於紀錄香港被忽視的角落與不斷變遷的地景——頌揚尋常事物中的不凡之美。</p>
                 </div>
             </div>
         </section>
 
         <!-- 02. DISPATCHES (News/Events) -->
         <section id="news" class="section">
-            <h2 class="massive-statement" style="font-size: 3.5rem;">Current Operations<br><span>& Briefings</span></h2>
+            <h2 class="massive-statement lang-en" style="font-size: 3.5rem;">Current Operations<br><span>& Briefings</span></h2>
+            <h2 class="massive-statement lang-zh" style="font-size: 3.5rem;">當前運作<br><span>與簡報</span></h2>
             
             <ul class="directory-list">
                 <li class="directory-item">
                     <div class="directory-date">Summer 2026</div>
                     <div class="directory-content">
-                        <h3>Studio Incubation</h3>
-                        <p>We are currently settling into the studio space at JCCAC L4-12. Designing the space as a safe environment for community dialogue.</p>
+                        <h3 class="lang-en">Studio Incubation</h3>
+                        <h3 class="lang-zh">工作室籌備期</h3>
+                        <p class="lang-en">We are currently settling into the new studio space at JCCAC L4-12. Designing the space as a safe environment for community dialogue.</p>
+                        <p class="lang-zh">我們正致力將此空間打造為適合社區對話的安全環境。</p>
                     </div>
                 </li>
                 <li class="directory-item">
                     <div class="directory-date">Sept 2026</div>
                     <div class="directory-content">
-                        <h3>The Grand Launch</h3>
-                        <p>Our digital storefront, official contact channels, and calendar of public events will fully launch this September.</p>
+                        <h3 class="lang-en">The Grand Launch</h3>
+                        <h3 class="lang-zh">全面啟動</h3>
+                        <p class="lang-en">Our digital storefront, official contact channels, and calendar of public events will fully launch this September.</p>
+                        <p class="lang-zh">我們的數位店鋪、官方聯繫管道以及公開活動日程，將於今年九月全面上線。</p>
                     </div>
                 </li>
             </ul>
 
             <div style="margin-top: 4rem; padding: 3rem; background: var(--text-main); color: var(--bg-color);">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem;">Initiate Dialogue</h3>
-                <p style="font-family: var(--font-tech);">The studio operates by appointment only during incubation. Drop a message to pitch an idea or schedule a desk visit.</p>
-                <a href="https://www.instagram.com/parttimeaudlts" target="_blank" class="brutalist-button" style="background: var(--bg-color); color: var(--text-main);">Signal @parttimeadults</a>
+                <h3 class="lang-en" style="font-size: 2rem; margin-bottom: 1rem;">Initiate Dialogue</h3>
+                <h3 class="lang-zh" style="font-size: 2rem; margin-bottom: 1rem;">啟動對話</h3>
+                <p class="lang-en" style="font-family: var(--font-tech);">The studio operates by appointment only during incubation. Drop a message to pitch an idea or schedule a desk visit.</p>
+                <p class="lang-zh" style="font-family: 'Noto Serif TC', serif;">籌備期間工作室僅接受預約。歡迎發送訊息與我們交流想法或預約來訪。</p>
+                <a href="https://www.instagram.com/parttimeadults_" target="_blank" class="brutalist-button" style="background: var(--bg-color); color: var(--text-main);">Signal @parttimeadults</a>
             </div>
         </section>
 
         <!-- 03. THE MARKET (Shop/Services) -->
         <section id="market" class="section">
-            <h2 class="massive-statement" style="font-size: 3.5rem;">Catalog &<br><span>Commissions</span></h2>
+            <h2 class="massive-statement lang-en" style="font-size: 3.5rem;">Catalog &<br><span>Commissions</span></h2>
+            <h2 class="massive-statement lang-zh" style="font-size: 3.5rem;">服務目錄<br><span>與委託</span></h2>
 
             <div style="padding: 4rem 0; border-bottom: var(--border-style);">
                 <span class="framework-num">Storefront Status</span>
-                <h3 style="font-size: 2.5rem; margin-bottom: 1rem;">Opening September 2026</h3>
-                <p class="text-body">Our online shop is currently under construction as we develop our first official series of physical art products, local-heritage zines, and independent illustration prints.</p>
+                <h3 class="lang-en" style="font-size: 2.5rem; margin-bottom: 1rem;">Opening September 2026</h3>
+                <h3 class="lang-zh" style="font-size: 2.5rem; margin-bottom: 1rem;">2026 年 9 月開幕</h3>
+                <p class="text-body lang-en">Our online shop is currently under construction as we develop our first official series of physical art products, local-heritage zines, and independent illustration prints.</p>
+                <p class="text-body lang-zh">線上商店目前正在建置中。我們正積極開發首波實體藝術產品、本地文化小誌（Zines）以及獨立插畫版畫。</p>
             </div>
 
             <ul class="directory-list" style="border-top: none; margin-top: 0;">
                 <li class="directory-item">
                     <div class="directory-date">Service</div>
                     <div class="directory-content">
-                        <h3>Tailored Workshops</h3>
-                        <p>Designing multi-sensory or visual storytelling workshops for schools, community centers, and cultural groups.</p>
+                        <h3 class="lang-en">Tailored Workshops</h3>
+                        <h3 class="lang-zh">客製化工作坊</h3>
+                        <p class="lang-en">Designing multi-sensory or visual storytelling workshops for schools, community centers, and cultural groups.</p>
+                        <p class="lang-zh">為學校、社區中心與文化團體設計多感官互動或視覺敘事工作坊。</p>
                     </div>
                 </li>
                 <li class="directory-item">
                     <div class="directory-date">Service</div>
                     <div class="directory-content">
-                        <h3>Visual Narratives</h3>
-                        <p>Custom mapping, community sketching documentation, and editorial illustration focusing on culture and heritage.</p>
+                        <h3 class="lang-en">Visual Narratives</h3>
+                        <h3 class="lang-zh">視覺敘事與插畫</h3>
+                        <p class="lang-en">Custom mapping, community sketching documentation, and editorial illustration focusing on culture and heritage.</p>
+                        <p class="lang-zh">專注於文化與遺產的主題，提供客製化地圖繪製、社區速寫紀錄與編輯插畫服務。</p>
                     </div>
                 </li>
                 <li class="directory-item">
                     <div class="directory-date">Service</div>
                     <div class="directory-content">
-                        <h3>Space Sharing</h3>
-                        <p>Partnering with fellow cultural practitioners to host intimate, meaningful dialogues in our JCCAC studio space.</p>
+                        <h3 class="lang-en">Space Sharing</h3>
+                        <h3 class="lang-zh">空間共享</h3>
+                        <p class="lang-en">Partnering with fellow cultural practitioners to host intimate, meaningful dialogues in our JCCAC studio space.</p>
+                        <p class="lang-zh">與其他文化工作者合作，在我們的 JCCAC 工作室舉辦具備深度與意義的小型對話聚會。</p>
                     </div>
                 </li>
             </ul>
@@ -371,6 +474,7 @@
     </main>
 
     <script>
+        // 切換頁面邏輯
         function switchPage(pageId) {
             const sections = document.querySelectorAll('.section');
             sections.forEach(sec => sec.classList.remove('active'));
@@ -383,11 +487,29 @@
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
+        // 切換語言邏輯
+        function setLanguage(lang) {
+            document.documentElement.setAttribute('lang', lang);
+            
+            // 更新按鈕樣式
+            document.getElementById('btn-en').classList.remove('active');
+            document.getElementById('btn-zh').classList.remove('active');
+            document.getElementById('btn-' + lang).classList.add('active');
+            
+            // 儲存使用者選擇
+            localStorage.setItem('preferredLanguage', lang);
+        }
+
         window.addEventListener('DOMContentLoaded', () => {
+            // 初始化頁面路由
             const hash = window.location.hash.replace('#', '');
             if (['about', 'news', 'market'].includes(hash)) {
                 switchPage(hash);
             }
+
+            // 初始化語言偏好
+            const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+            setLanguage(savedLang);
         });
     </script>
 </body>
